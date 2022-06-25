@@ -1,9 +1,10 @@
-#![allow(unused)]
 mod audio_clip;
+
+use std::path::Path;
 
 use chrono::Local;
 use clap::{Parser, Subcommand};
-use color_eyre::eyre::Result;
+use color_eyre::eyre::{Result, eyre};
 
 use crate::audio_clip::AudioClip;
 
@@ -14,7 +15,8 @@ enum Commands {
     },
     #[clap(arg_required_else_help = true)]
     Play {
-        name: String,
+        path: String,
+        name: Option<String>,
     },
 }
 
@@ -36,9 +38,20 @@ fn main() -> Result<()> {
             clip.export(format!("{}.wav", clip.name).as_str())?;
             println!("Audio clip saved as {}.wav", clip.name);
         }
-        Commands::Play { name } => {
-            println!("Play!");
-            todo!()
+        Commands::Play { name, path } => {
+            
+            let name = match name {
+                Some(name) => name,
+                None => Path::new(&path)
+                    .file_stem()
+                    .ok_or_else(|| eyre!("Invalid path: {}", path))?
+                    .to_str()
+                    .ok_or_else(|| eyre!("Path is not utf8"))?
+                    .to_string(),
+            };
+            
+            let clip = AudioClip::import(name, path)?;
+            clip.play()?;    
         }
     };
 

@@ -12,3 +12,6 @@ ctrlc = "3.2.2"
 color-eyre = "0.6.1"
 chrono = "0.4.19"
 hound = "3.4.0"
+symphonia = {version = "0.5.0", features = ["isomp4", "mp3", "aac"] }
+log = "0.4.17"
+dasp = { version = "0.11.0", features = ["signal", "interpolate", "interpolate-linear"] }
