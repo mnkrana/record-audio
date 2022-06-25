@@ -27,6 +27,7 @@ record-audio = "0.1.1"
 
 use record_audio::audio_clip::AudioClip as ac;
 
+```rust
 fn main() {
     match ac::record(None) {
         Ok(clip) => {
@@ -58,3 +59,4 @@ fn main() {
     //     Err(err) => println!("Error {}", err),
     // }
 }
+```
