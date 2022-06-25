@@ -3,6 +3,7 @@ use std::path::Path;
 use std::sync::mpsc::Sender;
 use std::sync::{mpsc::channel, Arc, Mutex};
 
+use chrono::Local;
 use color_eyre::eyre::eyre;
 use color_eyre::eyre::Result;
 use cpal::traits::DeviceTrait;
@@ -29,7 +30,10 @@ pub struct AudioClip {
 }
 
 impl AudioClip {
-    pub fn record(name: String) -> Result<AudioClip> {
+    pub fn record(name: Option<String>) -> Result<AudioClip> {
+        //check for name        
+        let name = name.unwrap_or_else(|| Local::now().format("%Y-%m-%d %H:%M:%S").to_string());
+        
         //get the host
         let host = cpal::default_host();
 
@@ -121,7 +125,7 @@ impl AudioClip {
         Ok(())
     }
 
-    pub fn import(name: String, path: String) -> Result<AudioClip> {
+    pub fn import(path: String) -> Result<AudioClip> {
         // Create a media source
         let file = Box::new(File::open(Path::new(&path))?);        
 
@@ -163,7 +167,7 @@ impl AudioClip {
             .ok_or_else(|| eyre!("Unknown channel count"))?;
 
         let mut clip = AudioClip {
-            name,
+            name : String::from("no_name"),
             samples: Vec::new(),
             sample_rate: track
                 .codec_params

@@ -1,6 +1,6 @@
 [package]
 name = "record-audio"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Mayank <mnk.rana@gmail.com>"]
 description = "record-audio is a terminal-based audio recorder and playback crate."
 edition = "2021"
