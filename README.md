@@ -25,9 +25,9 @@ record-audio = "0.1.1"
 
 ## Example
 
+```rust
 use record_audio::audio_clip::AudioClip as ac;
 
-```rust
 fn main() {
     match ac::record(None) {
         Ok(clip) => {
