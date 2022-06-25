@@ -1,9 +1,15 @@
 [package]
 name = "record-audio"
 version = "0.1.0"
+description = "record-audio is a terminal-based audio recorder and playback crate."
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+categories = ["cli"]
+keywords = ["audio", "record", "playback", "cli"]
+documentation = "https://github.com/mnkrana/record-audio"
+homepage = "https://github.com/mnkrana/record-audio"
+repository = "https://github.com/mnkrana/record-audio"
+readme = "README.md"
+license = "MIT"
 
 [dependencies]
 clap = { version = "3.1.18", features = ["derive"] }

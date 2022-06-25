@@ -1,12 +1,9 @@
-mod audio_clip;
-
 use std::path::Path;
 
 use chrono::Local;
 use clap::{Parser, Subcommand};
 use color_eyre::eyre::{Result, eyre};
-
-use crate::audio_clip::AudioClip;
+use record_audio::audio_clip::AudioClip;
 
 #[derive(Debug, Subcommand)]
 enum Commands {
